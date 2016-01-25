@@ -1,0 +1,15 @@
+# Logs and databases #
+######################
+*.log
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+
+.idea/
+*.iml
+
+# ignore compilation codes
+nodetest1/node_module/
+nodetest1/data/
