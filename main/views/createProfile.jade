@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    h1= title
+    form#formAddUser(name="adduser",method="post",action="/home")
+        input#inputUserName(type="text", placeholder="username", name="username")
+        input#inputUserPassword(type="text", placeholder="password", name="password")
+        input#inputConfirmPassword(type="text", placeholder="password", name="confirmPassword")
+        button#btnSubmit(type="create profile") create profile

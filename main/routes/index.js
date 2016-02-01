@@ -2,13 +2,13 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Comic Book website' });
+router.get('/main', function(req, res) {
+  res.render('main', { title: 'Comic Book website' });
 });
 
-/* GET Login page. */
-router.get('/login', function(req, res, err) {
-  res.render('login', { title: 'Please log in' });
+/* GET Create Profile page. */
+router.get('/createprofile', function(req, res) {
+  res.render('createprofile', { title: 'Create your profile' });
 });
 
 ///* GET Default Home page. */
@@ -17,7 +17,7 @@ router.get('/login', function(req, res, err) {
 //});
 
 /* POST to UserList Page */
-router.post('/login', function(req, res) {
+router.post('/createprofile', function(req, res) {
 
   // Set our internal DB variable
   var db = req.db;
@@ -25,24 +25,31 @@ router.post('/login', function(req, res) {
   // Get our form values. These rely on the "name" attributes
   var userName = req.body.username;
   var password = req.body.password;
+  var confirmPassword;
 
-  // Set our collection
-  var collection = db.get('usercollection');
+  if (!password == confirmPassword){
+    res.send("Passwords do not match");
+  }
+  else {
+    // Set our collection
+    var collection = db.get('usercollection');
+    // Submit to the DB
+    collection.insert({
+          "username": userName,
+          "password": password
+        }, function (err, doc) {
+          if (err) {
+            // If it failed, return error
+            res.send("There was a problem adding the information to the database.");
+          }
+          else {
+            // And forward to home page
+            res.redirect("home");
+          }
 
-  // Submit to the DB
-  collection.insert({
-    "username" : userName,
-    "password" : password
-  }, function (err, doc) {
-    if (err) {
-      // If it failed, return error
-      res.send("There was a problem adding the information to the database.");
-    }
-    else {
-      // And forward to home page
-      res.redirect("home");
-    }
-  });
+        }
+    );
+  }
 });
 
 module.exports = router;
