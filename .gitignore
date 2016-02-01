@@ -11,5 +11,9 @@
 *.iml
 
 # ignore compilation codes
-nodetest1/node_module/
+nodetest1/node_modules/
 nodetest1/data/
+nodetest1/types/
+main/node_modules/
+main/data/
+main/types/
