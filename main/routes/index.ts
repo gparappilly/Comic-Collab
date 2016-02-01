@@ -22,16 +22,18 @@ class Router{
 
         /* GET home page. */
         router.get('/main', function(req, res) {
-            res.render('main', { title: 'Comic Book website' });
+            res.render('main');
         });
+
         /* GET login page. */
         router.get('/login', function(req, res) {
-            res.render('login', { title: '' });
+            res.render('login');
+            res.redirect('main');
         });
 
         /* GET Create Profile page. */
         router.get('/createprofile', function(req, res) {
-            res.render('createprofile', { title: 'Create your profile' });
+            res.render('createprofile');
         });
 
 ///* GET Default Home page. */
