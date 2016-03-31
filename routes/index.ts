@@ -491,7 +491,8 @@ class Router {
                                         currentUser: req.currentUser,
                                         viewcount: docs['viewcount'],
                                         usernames: usernames,
-                                        comments: comments
+                                        comments: comments,
+                                        cur: req.currentUser
                                     });
                                 }
                             });
@@ -759,7 +760,8 @@ class Router {
             var collection = db.get('usercollection');
             collection.find({}, {}, function(e, docs) {
                 res.render('userlist', {
-                    "userlist": docs
+                    "userlist": docs,
+                    cur: req.currentUser
                 });
             });
         });
@@ -1371,7 +1373,8 @@ class Router {
                                             tumblrposturls: tumblr_posturls,
                                             profilepicture: docs['profilepicture'],
                                             followingprofilepics: followingprofilepics,
-                                            fanprofilepics: fanprofilepics
+                                            fanprofilepics: fanprofilepics,
+                                            cur: req.currentUser
                                         });
                                         },500);
                                     }
@@ -1620,7 +1623,8 @@ class Router {
                                 comicThumbnails: comicThumbnails,
                                 username: username,
                                 userExists: userExists,
-                                profilepicture: profilepicture
+                                profilepicture: profilepicture,
+                                cur: req.currentUser
                             });
                         },500);
 
@@ -1634,7 +1638,8 @@ class Router {
                             comicThumbnails: comicThumbnails,
                             username: username,
                             userExists: userExists,
-                            profilepicture: profilepicture
+                            profilepicture: profilepicture,
+                            cur: req.currentUser
                         })
                     }
                 })
@@ -1687,7 +1692,8 @@ class Router {
                     setTimeout(function() {
                         res.render('sortbylikes', {
                             "comics": docs,
-                            "comicThumbnails": comicThumbnails
+                            "comicThumbnails": comicThumbnails,
+                            cur: req.currentUser
                         });
                     }, 500);
                 }
@@ -1723,7 +1729,8 @@ class Router {
                     setTimeout(function() {
                         res.render('sortbyviews', {
                             "comics": docs,
-                            "comicThumbnails": comicThumbnails
+                            "comicThumbnails": comicThumbnails,
+                            cur: req.currentUser
                         });
                     }, 500);
                 }

@@ -14,19 +14,38 @@ body  {
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <a class="navbar-brand" href="../home">ComicCollab</a>
+        <%if (cur.getIsLoggedIn()){%>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul>
+                <a href="../uploadcomics/" class="btn btn-info" role="button" id='button_createComic' style="margin-top: 8px;">Create Comic</a>
+                <a href="../myprofile" class="btn btn-info" role="button" id='button_profile' style="margin-top: 8px;">Profile</a>
+                <a href="../userlist" class="btn btn-info" role="button" id='button_createComic' style="margin-top: 8px;">Users</a>
+                <div class="btn-group">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" style="margin-top: 8px;">
+                            Browse <span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="../sortbyviews">by views</a></li>
+                            <li><a href="../sortbylikes">by likes</a></li>
+                        </ul>
+                </div>
+                <div style="float: right;">
+                    <a href="../logout" class="btn btn-info" role="button" id='button_logout' style="margin-top: 8px;">Logout</a>
+                </div>
+            </ul>
+        </div>
+        <% }else {%>
+        <div id="navbar" class="navbar-collapse collapse" align="right">
+            <ul>
+                <a href="../register" class="btn btn-info" role="button" id='button_createprofile' style="margin-top: 8px;">Register</a>
+                <a href="../login" class="btn btn-info" role="button" id='button_login' style="margin-top: 8px;">Login</a>
+            </ul>
+        </div>
+        <%}%>
     </div>
 </nav>
 <div class="container">
-    <div class="page-header" style="margin-top: 100px">
+    <div class="page-header" style="margin-top: 80px">
         <h1>Sorted By Likes</h1>
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sort by
-                <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-                <li><a href="../sortbyviews">views</a></li>
-                <li><a href="../sortbylikes">likes</a></li>
-            </ul>
-        </div>
         </div>
         <ol>
             <% comics.forEach(function(comic, index) { %>
