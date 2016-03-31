@@ -1290,7 +1290,7 @@ var Router = (function () {
                                             var notFan = (fans.indexOf(req.currentUser.getUsername()) == -1);
                                             setTimeout(function () {
                                                 res.render('users', {
-                                                    userName: username,
+                                                    username: username,
                                                     fullname: docs['fullname'],
                                                     location: docs['location'],
                                                     age: docs['age'],
@@ -1581,6 +1581,16 @@ var Router = (function () {
         });
         /*POST search for home page*/
         router.post('/', function (req, res) {
+            var search = req.body.search;
+            res.redirect('/search/' + search);
+        });
+        /*POST search for sortbyviews page*/
+        router.post('/sortbyviews', function (req, res) {
+            var search = req.body.search;
+            res.redirect('/search/' + search);
+        });
+        /*POST search for sortbyviews page*/
+        router.post('/sortbylikes', function (req, res) {
             var search = req.body.search;
             res.redirect('/search/' + search);
         });
