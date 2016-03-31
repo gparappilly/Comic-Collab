@@ -34,10 +34,20 @@ body  {
             </ul>
         </div>
         <% }else {%>
-        <div id="navbar" class="navbar-collapse collapse" align="right">
+        <div id="navbar" class="navbar-collapse collapse">
             <ul>
+                <div class="btn-group">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" style="margin-top: 8px;">
+                            Browse <span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="../sortbyviews">by views</a></li>
+                            <li><a href="../sortbylikes">by likes</a></li>
+                        </ul>
+                </div>
+                <div style="float: right;">
                 <a href="../register" class="btn btn-info" role="button" id='button_createprofile' style="margin-top: 8px;">Register</a>
                 <a href="../login" class="btn btn-info" role="button" id='button_login' style="margin-top: 8px;">Login</a>
+                </div>
             </ul>
         </div>
         <%}%>
