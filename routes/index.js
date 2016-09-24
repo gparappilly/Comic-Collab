@@ -696,7 +696,7 @@ var Router = (function () {
         router.get('/userlist', function (req, res) {
             var db = req.db;
             var collection = db.get('usercollection');
-            collection.find({}, {}, function (e, docs) {
+            collection.find({}, { sort: { "fancount": -1 } }, function (e, docs) {
                 res.render('userlist', {
                     "userlist": docs,
                     cur: req.currentUser
@@ -1191,6 +1191,23 @@ var Router = (function () {
                                 });
                             })(i);
                         }
+                        //
+                        var fanCount = 0;
+                        var fanCollection = db.get('fans');
+                        fanCollection.count({ "following": username }, function (fanerror, fandocs) {
+                            if (fanerror) {
+                                fanCount = 0;
+                            }
+                            else {
+                                fanCount = Number(fandocs);
+                                collection.update({ "username": username }, {
+                                    $set: {
+                                        "fancount": fanCount
+                                    }
+                                });
+                            }
+                        });
+                        //
                         var deviantartusername = docs['deviantartusername'];
                         var deviantArtImages = [];
                         var deviantUrls = [];
@@ -1591,6 +1608,11 @@ var Router = (function () {
         });
         /*POST search for sortbyviews page*/
         router.post('/sortbylikes', function (req, res) {
+            var search = req.body.search;
+            res.redirect('/search/' + search);
+        });
+        /*POST search for userlist page*/
+        router.post('/userlist', function (req, res) {
             var search = req.body.search;
             res.redirect('/search/' + search);
         });
